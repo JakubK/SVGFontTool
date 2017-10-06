@@ -11,19 +11,19 @@
         <StackPanel Margin="10" Orientation="Vertical">
             <Label Margin="10,0,0,0">SVG Font path:</Label>
             <StackPanel Margin="10,0,10,0" HorizontalAlignment="Left" Width="350" Height="35" Orientation="Horizontal">
-                <TextBox VerticalContentAlignment="Center" Width="280"/>
-                <Button Content="Browse..." Width="60"/>
+                <TextBox x:Name="txtFont" VerticalContentAlignment="Center" Width="280"/>
+                <Button Content="Browse..." Click="Browse_Font" Width="60"/>
             </StackPanel>
             <Label Margin="10,20,0,0">Enum output path:</Label>
             <StackPanel Margin="10,0,10,0" HorizontalAlignment="Left" Width="350" Height="35" Orientation="Horizontal">
-                <TextBox VerticalContentAlignment="Center" Width="280"/>
-                <Button Content="Browse..." Width="60"/>
+                <TextBox x:Name="txtDestination" VerticalContentAlignment="Center" Width="280"/>
+                <Button Click="Browse_Destination" Content="Browse..." Width="60"/>
             </StackPanel>
             <StackPanel Margin="10,30,10,0" HorizontalAlignment="Left" Width="350" Height="35" Orientation="Horizontal">
                 <Label>Enum name:</Label>
-                <TextBox VerticalContentAlignment="Center" Width="263"/>
+                <TextBox x:Name="txtEnum" VerticalContentAlignment="Center" Width="263"/>
             </StackPanel>
-            <Button Content="Start" Height="40" Margin="10"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+            <Button Content="Start" Click="Confirm" Height="40" Margin="10"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         </StackPanel>
     </Grid>
 </Window>
