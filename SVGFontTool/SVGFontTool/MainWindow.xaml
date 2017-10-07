@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SVGFontTool"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SVGFontTool - transfer Glyph names to Enum" Height="320" Width="400">
+        Title="SVGFontTool - transfer Glyph names to Enum" Height="400" Width="400">
     <Grid>
         <StackPanel Margin="10" Orientation="Vertical">
             <Label Margin="10,0,0,0">SVG Font path:</Label>
@@ -22,6 +22,10 @@
             <StackPanel Margin="10,30,10,0" HorizontalAlignment="Left" Width="350" Height="35" Orientation="Horizontal">
                 <Label>Enum name:</Label>
                 <TextBox x:Name="txtEnum" VerticalContentAlignment="Center" Width="263"/>
+            </StackPanel>
+            <StackPanel Margin="10,30,10,0" HorizontalAlignment="Left" Width="350" Height="35" Orientation="Horizontal">
+                <Label>Dictionary name (optional):</Label>
+                <TextBox x:Name="txtDictionary" VerticalContentAlignment="Center" Width="183"/>
             </StackPanel>
             <Button Content="Start" Click="Confirm" Height="40" Margin="10"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
         </StackPanel>

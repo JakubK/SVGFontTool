@@ -55,10 +55,10 @@ namespace SVGFontTool
                
                 if (File.Exists(txtFont.Text) && Directory.Exists(txtDestination.Text))
                 {
-
                     //Getting data
                     List<string> GlyphNames = new List<string>();
                     List<string> PathDatas = new List<string>();
+                    
                     XmlTextReader reader = new XmlTextReader(txtFont.Text);
                     XmlNodeType type;
                     while(reader.Read())
@@ -70,11 +70,13 @@ namespace SVGFontTool
                             //Add & Change existing XML file to remove special characters and capitalize letters
                             GlyphNames.Add(glyph.PrepareGlyphName());
                             PathDatas.Add(reader.GetAttribute("d"));
+
                         }
                     }
                     //Writing formatted data to output *.cs file
                     using (StreamWriter writer = new StreamWriter(@"" + txtDestination.Text + "/" + txtEnum.Text + ".cs"))
                     {
+                        //Enum
                         writer.WriteLine("public enum " + txtEnum.Text);
                         writer.WriteLine("{");
                         for (int i = 0; i < GlyphNames.Count; i++)
@@ -89,10 +91,31 @@ namespace SVGFontTool
                             }
                         }
                         writer.WriteLine("}");
+
+                        writer.WriteLine("");
+                        //Dictionary
+                        writer.WriteLine("public Dictionary<" + txtEnum.Text +  ",string> " + txtDictionary.Text + " = new Dictionary<string,string>" );
+                        writer.WriteLine("{");
+                        for(int i = 0;i < PathDatas.Count;i++)
+                        {
+                            string enumPath = txtEnum.Text + "." + GlyphNames[i];
+                            string GeometryPath = Convert.ToChar(34) + PathDatas[i] + Convert.ToChar(34);
+
+                            if (i != GlyphNames.Count - 1)
+                            {
+                                writer.WriteLine("{ " + enumPath + "," + GeometryPath + " }" + ",");
+                            }
+                            else
+                            {
+                                writer.WriteLine("{ " + enumPath + "," + GeometryPath + " }");
+                            }
+                        }
+                        writer.WriteLine("};");
+                        Dictionary<string, string> dd = new Dictionary<string, string>
+                        {
+                            { "","" }
+                        };
                     }
-
-                    //Prepare Icon Dictionary 
-
                 }
             }
         }
