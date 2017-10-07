@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SVGFontTool.Logic;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -54,6 +55,7 @@ namespace SVGFontTool
                
                 if (File.Exists(txtFont.Text) && Directory.Exists(txtDestination.Text))
                 {
+
                     //Getting data
                     List<string> GlyphNames = new List<string>();
                     List<string> PathDatas = new List<string>();
@@ -64,7 +66,9 @@ namespace SVGFontTool
                         type = reader.NodeType;
                         if (reader.Name == "glyph")
                         {
-                            GlyphNames.Add(reader.GetAttribute("glyph-name"));
+                            string glyph = reader.GetAttribute("glyph-name");
+                            //Add & Change existing XML file to remove special characters and capitalize letters
+                            GlyphNames.Add(glyph.PrepareGlyphName());
                             PathDatas.Add(reader.GetAttribute("d"));
                         }
                     }
@@ -86,6 +90,8 @@ namespace SVGFontTool
                         }
                         writer.WriteLine("}");
                     }
+
+                    //Prepare Icon Dictionary 
 
                 }
             }
