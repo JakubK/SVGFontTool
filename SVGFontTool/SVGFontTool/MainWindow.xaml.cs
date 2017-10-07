@@ -54,6 +54,7 @@ namespace SVGFontTool
                
                 if (File.Exists(txtFont.Text) && Directory.Exists(txtDestination.Text))
                 {
+                    //Getting data
                     List<string> GlyphNames = new List<string>();
                     List<string> PathDatas = new List<string>();
                     XmlTextReader reader = new XmlTextReader(txtFont.Text);
@@ -67,6 +68,25 @@ namespace SVGFontTool
                             PathDatas.Add(reader.GetAttribute("d"));
                         }
                     }
+                    //Writing formatted data to output *.cs file
+                    using (StreamWriter writer = new StreamWriter(@"" + txtDestination.Text + "/" + txtEnum.Text + ".cs"))
+                    {
+                        writer.WriteLine("public enum " + txtEnum.Text);
+                        writer.WriteLine("{");
+                        for (int i = 0; i < GlyphNames.Count; i++)
+                        {
+                            if(i != GlyphNames.Count-1)
+                            {
+                                writer.WriteLine(GlyphNames[i] + ",");
+                            }
+                            else
+                            {
+                                writer.WriteLine(GlyphNames[i]);
+                            }
+                        }
+                        writer.WriteLine("}");
+                    }
+
                 }
             }
         }
